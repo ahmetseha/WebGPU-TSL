@@ -60,11 +60,15 @@ input {
 	display: flex;
 	flex-direction: column;
 	padding: 28px 32px 40px;
-	animation: yumusak-giris 0.7s var(--ease) both;
 }
 
 #karsilama[hidden] {
 	display: none;
+}
+
+html.hareket .karsilama-ust,
+html.hareket .karsilama-govde > * {
+	opacity: 0;
 }
 
 .karsilama-arka {
@@ -121,7 +125,6 @@ input {
 .karsilama-govde {
 	width: min(720px, 100%);
 	margin: auto 0;
-	animation: yumusak-yukari 0.75s 0.08s var(--ease) both;
 }
 
 .eyebrow {
@@ -191,8 +194,7 @@ input {
 	transition:
 		border-color 0.22s var(--ease),
 		background 0.22s var(--ease),
-		color 0.22s var(--ease),
-		transform 0.22s var(--ease);
+		color 0.22s var(--ease);
 }
 
 .birincil {
@@ -207,7 +209,6 @@ input {
 
 .birincil:hover {
 	background: #fff;
-	transform: translateY(-1px);
 }
 
 .ikincil {
@@ -222,12 +223,12 @@ input {
 #notlar button:hover {
 	border-color: var(--accent);
 	background: var(--accent-dim);
-	transform: translateY(-1px);
 }
 
 /* ——— Dil ——— */
 
 .dil-switch {
+	position: relative;
 	display: flex;
 	padding: 3px;
 	border: 1px solid var(--line);
@@ -235,7 +236,20 @@ input {
 	background: rgba(0, 0, 0, 0.2);
 }
 
+.dil-gosterge {
+	position: absolute;
+	top: 3px;
+	bottom: 3px;
+	left: 0;
+	width: 42px;
+	border-radius: 999px;
+	background: var(--accent-dim);
+	pointer-events: none;
+}
+
 .dil-switch button {
+	position: relative;
+	z-index: 1;
 	min-width: 42px;
 	border: 0;
 	border-radius: 999px;
@@ -246,19 +260,25 @@ input {
 	font-size: 12px;
 	font-weight: 600;
 	cursor: pointer;
-	transition:
-		background 0.22s var(--ease),
-		color 0.22s var(--ease);
+	transition: color 0.22s var(--ease);
 }
 
 .dil-switch button.aktif {
-	background: var(--accent-dim);
+	background: transparent;
 	color: var(--accent);
 }
 
-.dil-switch.kucuk button {
+.dil-switch.kucuk button,
+#ust .dil-switch button {
 	min-width: 36px;
 	padding: 5px 8px;
+	border: 0;
+	background: transparent;
+}
+
+#ust .dil-switch button:hover {
+	border-color: transparent;
+	background: transparent;
 }
 
 /* ——— Uygulama kromu ——— */
@@ -267,23 +287,37 @@ input {
 	display: none;
 }
 
-#uygulama:not([hidden]) .baslik,
-#uygulama:not([hidden]) .gezgin,
-#uygulama:not([hidden]) #hud,
-#uygulama:not([hidden]) #notlar {
-	animation: yumusak-giris 0.45s var(--ease) both;
+html.hareket #uygulama:not([hidden]) .baslik,
+html.hareket #uygulama:not([hidden]) .gezgin,
+html.hareket #uygulama:not([hidden]) #hud {
+	opacity: 0;
 }
 
-#uygulama:not([hidden]) .gezgin {
-	animation-delay: 0.04s;
+#ilerleme {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 25;
+	height: 3px;
+	pointer-events: none;
+	background: rgba(255, 255, 255, 0.06);
 }
 
-#uygulama:not([hidden]) #hud {
-	animation-delay: 0.08s;
+#ilerleme[hidden] {
+	display: none;
 }
 
-#uygulama:not([hidden]) #notlar {
-	animation-delay: 0.12s;
+#ilerleme-cubuk {
+	height: 100%;
+	width: 100%;
+	transform: scaleX(0);
+	transform-origin: left center;
+	background: linear-gradient(
+		90deg,
+		var(--accent),
+		#9aebff
+	);
 }
 
 #ust {
@@ -316,9 +350,23 @@ input {
 	backdrop-filter: blur(18px) saturate(1.2);
 }
 
+.baslik-ust {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+}
+
 .baslik p,
 .baslik h1 {
 	margin: 0;
+}
+
+#ders-adim {
+	color: var(--muted);
+	font-family: var(--mono);
+	font-size: 11px;
+	letter-spacing: 0.04em;
 }
 
 #ders-no {
@@ -382,27 +430,23 @@ input {
 	background: rgba(255, 255, 255, 0.04);
 }
 
-.ders-sec-kutu::after {
-	content: "";
+.ders-sec-ok {
 	position: absolute;
-	top: 50%;
-	right: 12px;
-	width: 10px;
-	height: 10px;
-	border-right: 1.5px solid var(--muted);
-	border-bottom: 1.5px solid var(--muted);
-	transform: translateY(-70%) rotate(45deg);
+	top: 0;
+	right: 11px;
+	bottom: 0;
+	display: grid;
+	place-items: center;
+	color: var(--muted);
 	pointer-events: none;
-	transition: transform 0.22s var(--ease), border-color 0.22s;
 }
 
 .ders-sec-kutu:focus-within select {
 	border-color: var(--accent);
 }
 
-.ders-sec-kutu:focus-within::after {
-	border-color: var(--accent);
-	transform: translateY(-20%) rotate(225deg);
+.ders-sec-kutu:focus-within .ders-sec-ok {
+	color: var(--accent);
 }
 
 #hud,
@@ -520,16 +564,9 @@ dd {
 	max-height: calc(100vh - 116px);
 	overflow: auto;
 	border-radius: var(--radius);
-	transform: translateX(0);
-	opacity: 1;
-	transition:
-		opacity 0.28s var(--ease),
-		transform 0.28s var(--ease);
 }
 
 #notlar.kapali {
-	opacity: 0;
-	transform: translateX(14px);
 	pointer-events: none;
 	visibility: hidden;
 }
@@ -627,38 +664,14 @@ dd {
 	font-size: 13px;
 }
 
-@keyframes yumusak-giris {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-}
-
-@keyframes yumusak-yukari {
-	from {
-		opacity: 0;
-		transform: translateY(14px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
 @media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation: none !important;
-		transition: none !important;
+	html.hareket .karsilama-ust,
+	html.hareket .karsilama-govde > * {
+		opacity: 1;
 	}
 
-	.ders-sec-kutu:focus-within::after {
-		transform: translateY(-20%) rotate(225deg);
+	.ders-sec-ok.acik {
+		transform: rotate(180deg);
 	}
 }
 

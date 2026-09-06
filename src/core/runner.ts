@@ -9,6 +9,12 @@ import {
 } from "@/core/webgpu-app"
 import { dersMetni, arayuzuUygula } from "@/ui/arayuz"
 import {
+	baslikOynat,
+	ilerlemeyiGuncelle,
+	notlariDegistir,
+	notlariKapat
+} from "@/ui/hareket"
+import {
 	dilAl,
 	dilDinle,
 	sonDersiYaz,
@@ -55,8 +61,6 @@ export async function egitimiBaslat(
 	const istatistikEk = document.getElementById(
 		"istatistik-ek"
 	)
-	const notlarPanel = document.getElementById("notlar")
-
 	if (
 		!(secici instanceof HTMLSelectElement) ||
 		notlarEl === null ||
@@ -68,6 +72,7 @@ export async function egitimiBaslat(
 
 	let aktif: LessonHandle | null = null
 	let aktifDers: LessonModule | null = null
+	let ilkYukleme = true
 	const clock = new Clock()
 
 	const basliklariYaz = (ders: LessonModule): void => {
@@ -105,6 +110,11 @@ export async function egitimiBaslat(
 		sonDersiYaz(ders.id)
 		arayuzuUygula(dilAl(), dersler, ders.id)
 		basliklariYaz(ders)
+		ilerlemeyiGuncelle(Number(ders.no), dersler.length)
+		if (!ilkYukleme) {
+			baslikOynat()
+		}
+		ilkYukleme = false
 
 		debugAc(app.renderer, ders.id)
 		console.info(
@@ -171,13 +181,13 @@ export async function egitimiBaslat(
 	document
 		.getElementById("notlar-ac")
 		?.addEventListener("click", () => {
-			notlarPanel?.classList.toggle("kapali")
+			notlariDegistir()
 		})
 
 	document
 		.getElementById("notlar-kapat")
 		?.addEventListener("click", () => {
-			notlarPanel?.classList.add("kapali")
+			void notlariKapat()
 		})
 
 	dilDinle((dil) => {

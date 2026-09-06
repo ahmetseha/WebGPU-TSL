@@ -11,6 +11,15 @@ import {
 import { t } from "@/i18n/metin"
 import { dersler } from "@/lessons/katalog"
 import { arayuzuUygula, dilDugmeleriniBagla } from "@/ui/arayuz"
+import {
+	dersSahnesiCikis,
+	dersSahnesiGiris,
+	dilGostergesiniGuncelle,
+	hareketiKur,
+	karsilamaCikis,
+	karsilamaGiris,
+	ozellikleriOynat
+} from "@/ui/hareket"
 
 const hataKutusu = document.getElementById("hata")
 const karsilama = document.getElementById("karsilama")
@@ -21,8 +30,11 @@ const devam = document.getElementById("devam")
 const anasayfa = document.getElementById("anasayfa")
 
 let kumanda: EgitimKumanda | null = null
+let gecisVar = false
 
 dilDugmeleriniBagla()
+hareketiKur()
+void karsilamaGiris()
 
 const devamGuncelle = (): void => {
 	if (devam instanceof HTMLButtonElement) {
@@ -31,33 +43,61 @@ const devamGuncelle = (): void => {
 }
 
 devamGuncelle()
-dilDinle(devamGuncelle)
+dilDinle(() => {
+	devamGuncelle()
+	dilGostergesiniGuncelle()
+	if (!document.body.classList.contains("ders-mod")) {
+		ozellikleriOynat()
+	}
+})
 
-const dersEkraniAc = (): void => {
+const dersEkraniAc = async (): Promise<void> => {
+	if (gecisVar || document.body.classList.contains("ders-mod")) {
+		return
+	}
+
+	gecisVar = true
+	await karsilamaCikis()
 	karsilama?.setAttribute("hidden", "")
 	uygulama?.removeAttribute("hidden")
 	canvas?.removeAttribute("hidden")
 	document.body.classList.add("ders-mod")
+	await dersSahnesiGiris()
+	gecisVar = false
 }
 
 const anaSayfaAc = (): void => {
-	kumanda?.duraklat()
-	uygulama?.setAttribute("hidden", "")
-	canvas?.setAttribute("hidden", "")
-	karsilama?.removeAttribute("hidden")
-	document.body.classList.remove("ders-mod")
-	arayuzuUygula(dilAl())
-	devamGuncelle()
+	if (gecisVar || !document.body.classList.contains("ders-mod")) {
+		return
+	}
+
+	void (async () => {
+		gecisVar = true
+		kumanda?.duraklat()
+		await dersSahnesiCikis()
+		uygulama?.setAttribute("hidden", "")
+		canvas?.setAttribute("hidden", "")
+		karsilama?.removeAttribute("hidden")
+		document.body.classList.remove("ders-mod")
+		arayuzuUygula(dilAl())
+		devamGuncelle()
+		dilGostergesiniGuncelle()
+		await karsilamaGiris()
+		gecisVar = false
+	})()
 }
 
 const baslatEgitim = (id?: string): void => {
-	dersEkraniAc()
+	void dersEkraniAc().then(() => {
+		if (kumanda !== null) {
+			kumanda.surdur()
+			if (id !== undefined) {
+				void kumanda.dersYukle(id)
+			}
+		}
+	})
 
 	if (kumanda !== null) {
-		kumanda.surdur()
-		if (id !== undefined) {
-			void kumanda.dersYukle(id)
-		}
 		return
 	}
 

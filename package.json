@@ -13,6 +13,7 @@
     "vite": "^8.2.2"
   },
   "dependencies": {
+    "motion": "^13.2.0",
     "three": "^0.185.1"
   }
 }

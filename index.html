@@ -12,6 +12,9 @@
 			content="Interactive open-source course for Three.js, WebGPU, and TSL. 53 lessons in Turkish and English."
 		/>
 		<title>Three.js WebGPU & TSL</title>
+		<script>
+			document.documentElement.classList.add("hareket")
+		</script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link
 			rel="preconnect"
@@ -33,6 +36,7 @@
 					role="group"
 					aria-label="Language"
 				>
+					<span class="dil-gosterge" aria-hidden="true"></span>
 					<button
 						id="dil-tr"
 						type="button"
@@ -75,10 +79,17 @@
 
 		<canvas id="sahne" hidden></canvas>
 
+		<div id="ilerleme" hidden aria-hidden="true">
+			<div id="ilerleme-cubuk"></div>
+		</div>
+
 		<div id="uygulama" hidden>
 			<header id="ust">
 				<div class="baslik">
-					<p id="ders-no"></p>
+					<div class="baslik-ust">
+						<p id="ders-no"></p>
+						<p id="ders-adim"></p>
+					</div>
 					<h1 id="ders-baslik"></h1>
 					<p id="ders-bolum"></p>
 				</div>
@@ -94,6 +105,7 @@
 						role="group"
 						aria-label="Language"
 					>
+						<span class="dil-gosterge" aria-hidden="true"></span>
 						<button type="button" data-dil="tr">TR</button>
 						<button type="button" data-dil="en">EN</button>
 					</div>
@@ -107,6 +119,22 @@
 							id="ders-sec"
 							data-i18n-aria="dersSec"
 						></select>
+						<span class="ders-sec-ok" aria-hidden="true">
+							<svg
+								viewBox="0 0 12 12"
+								width="12"
+								height="12"
+							>
+								<path
+									d="M2.2 4.4 L6 8.2 L9.8 4.4"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</span>
 					</div>
 					<button
 						id="sonraki"
