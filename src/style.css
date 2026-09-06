@@ -1,0 +1,256 @@
+:root {
+	--bg: #111318;
+	--panel: rgba(12, 14, 18, 0.86);
+	--line: rgba(255, 255, 255, 0.12);
+	--text: #e8edf4;
+	--muted: #9aa6b5;
+	--accent: #3ec5f1;
+	--warn: #ffcc33;
+	--sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+	--mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--sans);
+}
+
+#sahne {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+#ust {
+	position: fixed;
+	top: 12px;
+	left: 16px;
+	right: 16px;
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	align-items: flex-start;
+	pointer-events: none;
+}
+
+#ust .gezgin,
+#hud,
+#notlar {
+	pointer-events: auto;
+}
+
+.baslik p,
+.baslik h1 {
+	margin: 0;
+}
+
+#ders-no {
+	color: var(--accent);
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+#ders-baslik {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+#ders-bolum {
+	color: var(--muted);
+	font-size: 12px;
+	margin-top: 4px;
+}
+
+.gezgin {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+select,
+button,
+input[type="range"],
+label {
+	font: inherit;
+}
+
+select,
+button {
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	padding: 8px 10px;
+	background: var(--panel);
+	color: var(--text);
+	cursor: pointer;
+}
+
+select {
+	max-width: min(360px, 50vw);
+}
+
+button.aktif {
+	border-color: var(--accent);
+	color: var(--accent);
+}
+
+#hud {
+	position: fixed;
+	left: 16px;
+	bottom: 16px;
+	width: min(360px, calc(100vw - 32px));
+	max-height: calc(100vh - 140px);
+	overflow: auto;
+	padding: 14px;
+	border: 1px solid var(--line);
+	border-radius: 12px;
+	background: var(--panel);
+	backdrop-filter: blur(12px);
+}
+
+.akis {
+	margin: 0 0 12px;
+	color: var(--muted);
+	font-family: var(--mono);
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+dl {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	margin: 0 0 12px;
+}
+
+dl div {
+	padding: 8px;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+}
+
+dt {
+	color: var(--muted);
+	font-size: 11px;
+}
+
+dd {
+	margin: 4px 0 0;
+	font-family: var(--mono);
+	font-size: 15px;
+}
+
+#kontroller,
+#istatistik-ek {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+#kontroller label {
+	display: flex;
+	flex: 1 1 100%;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	color: var(--muted);
+	font-size: 12px;
+}
+
+#kontroller input[type="range"] {
+	flex: 1;
+}
+
+#notlar {
+	position: fixed;
+	top: 84px;
+	right: 16px;
+	width: min(420px, calc(100vw - 32px));
+	max-height: calc(100vh - 108px);
+	overflow: auto;
+	padding: 16px 18px;
+	border: 1px solid var(--line);
+	border-radius: 12px;
+	background: var(--panel);
+	backdrop-filter: blur(14px);
+}
+
+#notlar.kapali {
+	display: none;
+}
+
+#notlar h1,
+#notlar h2,
+#notlar h3 {
+	margin: 16px 0 8px;
+	font-weight: 600;
+}
+
+#notlar h1 {
+	font-size: 18px;
+}
+
+#notlar h2 {
+	font-size: 16px;
+	color: var(--accent);
+}
+
+#notlar h3 {
+	font-size: 14px;
+}
+
+#notlar p,
+#notlar li {
+	color: var(--muted);
+	font-size: 13px;
+	line-height: 1.55;
+}
+
+#notlar ul {
+	padding-left: 18px;
+}
+
+#notlar code {
+	font-family: var(--mono);
+	font-size: 12px;
+	color: var(--warn);
+}
+
+#notlar pre {
+	overflow: auto;
+	padding: 10px;
+	border-radius: 8px;
+	background: #0b0d12;
+	font-size: 12px;
+}
+
+#hata {
+	position: fixed;
+	left: 50%;
+	bottom: 16px;
+	transform: translateX(-50%);
+	max-width: 520px;
+	padding: 12px 14px;
+	border-radius: 8px;
+	background: #3b1515;
+	color: #ffd1d1;
+}
+
+@media (max-width: 900px) {
+	#notlar {
+		top: auto;
+		bottom: 16px;
+		max-height: 36vh;
+	}
+}

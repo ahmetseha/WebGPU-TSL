@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="tr">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Three.js WebGPU & TSL Eğitimi</title>
+	</head>
+	<body>
+		<canvas id="sahne"></canvas>
+
+		<header id="ust">
+			<div class="baslik">
+				<p id="ders-no">Ders</p>
+				<h1 id="ders-baslik">Yükleniyor</h1>
+				<p id="ders-bolum"></p>
+			</div>
+			<div class="gezgin">
+				<button id="onceki" type="button">Önceki</button>
+				<select id="ders-sec" aria-label="Ders seç"></select>
+				<button id="sonraki" type="button">Sonraki</button>
+				<button id="notlar-ac" type="button">Notlar</button>
+			</div>
+		</header>
+
+		<aside id="hud">
+			<p id="akis" class="akis"></p>
+			<dl>
+				<div><dt>Backend</dt><dd id="backend">…</dd></div>
+				<div>
+					<dt>navigator.gpu</dt>
+					<dd id="webgpu-destek">…</dd>
+				</div>
+				<div><dt>FPS</dt><dd id="fps">0</dd></div>
+				<div><dt>Frame</dt><dd id="frame-ms">0</dd></div>
+				<div>
+					<dt>drawCalls</dt>
+					<dd id="draw-calls">0</dd>
+				</div>
+				<div>
+					<dt>triangles</dt>
+					<dd id="triangles">0</dd>
+				</div>
+				<div><dt>points</dt><dd id="points">0</dd></div>
+				<div><dt>lines</dt><dd id="lines">0</dd></div>
+				<div>
+					<dt>geometries</dt>
+					<dd id="geometries">0</dd>
+				</div>
+				<div>
+					<dt>textures</dt>
+					<dd id="textures">0</dd>
+				</div>
+				<div>
+					<dt>compute</dt>
+					<dd id="compute-calls">0</dd>
+				</div>
+			</dl>
+			<div id="istatistik-ek"></div>
+			<div id="kontroller"></div>
+		</aside>
+
+		<article id="notlar">
+			<div id="notlar-icerik"></div>
+		</article>
+
+		<p id="hata" hidden></p>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>
