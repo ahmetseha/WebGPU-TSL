@@ -25,6 +25,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -88,8 +89,8 @@ export const lesson: LessonModule = {
 
 		kur(adet)
 		istatistikEk.textContent = webgpu
-			? "konum + hız · compute"
-			: "compute yok · CPU yedek"
+			? ky("konumHizCompute")
+			: ky("computeYokYedek")
 
 		kontrolHtml(
 			kontroller,

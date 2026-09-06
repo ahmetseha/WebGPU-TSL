@@ -19,6 +19,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const ADET = 180
@@ -89,8 +90,8 @@ export const lesson: LessonModule = {
 		kur()
 
 		istatistikEk.innerHTML =
-			`<p>FPS tek başına yetmez. 16.67 ms = 60 Hz.</p>
-			<p>CPU: JS + draw call. GPU: üçgen + shader + overdraw.</p>`
+			`<p>${ky("fpsYetmez")}</p>
+			<p>${ky("cpuGpu")}</p>`
 
 		kontrolHtml(
 			kontroller,
@@ -121,8 +122,8 @@ export const lesson: LessonModule = {
 			yuksek = !yuksek
 			if (segBtn !== null) {
 				segBtn.textContent = yuksek
-					? "Segment yüksek"
-					: "Segment düşük"
+					? ky("segYuksek")
+					: ky("segDusuk")
 				segBtn.classList.toggle("aktif", yuksek)
 			}
 			kur()
@@ -131,8 +132,8 @@ export const lesson: LessonModule = {
 			pahali = !pahali
 			if (shBtn !== null) {
 				shBtn.textContent = pahali
-					? "Shader pahalı"
-					: "Shader ucuz"
+					? ky("shaderPahali")
+					: ky("shaderUcuz")
 				shBtn.classList.toggle("aktif", pahali)
 			}
 			kur()

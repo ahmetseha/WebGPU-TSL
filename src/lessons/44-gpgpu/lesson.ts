@@ -31,6 +31,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -71,8 +72,8 @@ export const lesson: LessonModule = {
 		cekirdek.position.set(0, 1, 0)
 		scene.add(cekirdek)
 		istatistikEk.textContent = webgpu
-			? "p / v / a tamponları · GPGPU"
-			: "compute yok · CPU yedek"
+			? ky("pvaGpgpu")
+			: ky("computeYokYedek")
 
 		let kare = (_dt: number): void => {}
 		let temizlik = (): void => {}

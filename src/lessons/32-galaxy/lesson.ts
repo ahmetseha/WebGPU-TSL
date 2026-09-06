@@ -22,6 +22,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const ADET = 9000
@@ -143,8 +144,10 @@ export const lesson: LessonModule = {
 		return {
 			update: () => {
 				controls.update()
-				istatistikEk.textContent =
-					`${ADET} yıldız · spiral`
+				istatistikEk.textContent = ky(
+					"yildizSpiral",
+					{ n: ADET }
+				)
 			},
 			dispose: () => {
 				controls.dispose()

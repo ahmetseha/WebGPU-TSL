@@ -35,6 +35,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -79,8 +80,8 @@ export const lesson: LessonModule = {
 		zemin.rotation.x = -Math.PI / 2
 		scene.add(zemin)
 		istatistikEk.textContent = webgpu
-			? "kar · compute + Sprite"
-			: "compute yok · CPU kar"
+			? ky("karCompute")
+			: ky("computeYokKar")
 
 		let kare = (): void => {}
 		let temizlik = (): void => {}

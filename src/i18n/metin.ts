@@ -18,6 +18,7 @@ export type ArayuzMetni = {
 	destekYok: string
 	hudEtiket: string
 	anasayfa: string
+	kare: string
 	ozellikler: string[]
 }
 
@@ -41,6 +42,7 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		destekYok: "yok",
 		hudEtiket: "Canlı ölçüm",
 		anasayfa: "Ana sayfa",
+		kare: "Kare",
 		ozellikler: [
 			"WebGPU + TSL",
 			"53 sahne",
@@ -66,6 +68,7 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		destekYok: "no",
 		hudEtiket: "Live stats",
 		anasayfa: "Home",
+		kare: "Frame",
 		ozellikler: [
 			"WebGPU + TSL",
 			"53 scenes",

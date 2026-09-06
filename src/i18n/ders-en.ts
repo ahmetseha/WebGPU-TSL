@@ -1,6 +1,7 @@
 export type DersCeviri = {
 	title: string
 	bolum: string
+	akis?: string
 }
 
 export const dersEn: Record<string, DersCeviri> = {
@@ -58,7 +59,8 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"14": {
 		title: "UV manipulation",
-		bolum: "Part 4 — UVs and patterns"
+		bolum: "Part 4 — UVs and patterns",
+		akis: "uv * scale + offset + rot + time scroll"
 	},
 	"15": {
 		title: "Procedural patterns",
@@ -78,7 +80,8 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"19": {
 		title: "Procedural noise",
-		bolum: "Part 7 — Noise"
+		bolum: "Part 7 — Noise",
+		akis: "noise → terrain / cloud / smoke / dissolve"
 	},
 	"20": {
 		title: "Position nodes",
@@ -86,11 +89,13 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"21": {
 		title: "Vertex displacement",
-		bolum: "Part 8 — Vertex manipulation"
+		bolum: "Part 8 — Vertex manipulation",
+		akis: "positionLocal + sin / noise + time → wave / flag / terrain / jelly"
 	},
 	"22": {
 		title: "Normals",
-		bolum: "Part 8 — Vertex manipulation"
+		bolum: "Part 8 — Vertex manipulation",
+		akis: "displace vertex → old broken normal / approximate normal"
 	},
 	"23": {
 		title: "Node materials",
@@ -106,15 +111,18 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"26": {
 		title: "Time",
-		bolum: "Part 11 — Procedural animation"
+		bolum: "Part 11 — Procedural animation",
+		akis: "time * speed → sin → scale / color / position"
 	},
 	"27": {
 		title: "Animated noise",
-		bolum: "Part 11 — Procedural animation"
+		bolum: "Part 11 — Procedural animation",
+		akis: "noise(uv + time) → smoke / water / energy / lava"
 	},
 	"28": {
 		title: "Coffee smoke",
-		bolum: "Part 12 — Coffee smoke"
+		bolum: "Part 12 — Coffee smoke",
+		akis: "cup + rim + plane: noise + UV scroll + alpha mask"
 	},
 	"29": {
 		title: "Hologram shield",
@@ -130,11 +138,13 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"32": {
 		title: "Galaxy",
-		bolum: "Part 14 — Particles"
+		bolum: "Part 14 — Particles",
+		akis: "radius → arm angle + twist → spiral"
 	},
 	"33": {
 		title: "Explosion",
-		bolum: "Part 14 — Particles"
+		bolum: "Part 14 — Particles",
+		akis: "normalize(random) * age * speed → fade"
 	},
 	"34": {
 		title: "InstancedMesh",
@@ -154,7 +164,8 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"38": {
 		title: "Bloom",
-		bolum: "Part 16 — Post-processing"
+		bolum: "Part 16 — Post-processing",
+		akis: "HDR / emissive → threshold → blur → add back"
 	},
 	"39": {
 		title: "Depth buffer",
@@ -162,7 +173,8 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"40": {
 		title: "Depth effects",
-		bolum: "Part 17 — Depth"
+		bolum: "Part 17 — Depth",
+		akis: "depth → fog / color / coarse focus"
 	},
 	"41": {
 		title: "Compute shader logic",
@@ -170,7 +182,8 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"42": {
 		title: "WebGPU compute",
-		bolum: "Part 18 — Compute shaders"
+		bolum: "Part 18 — Compute shaders",
+		akis: "CPU command → Compute → Storage buffer → Points"
 	},
 	"43": {
 		title: "GPU particle simulation",
@@ -178,23 +191,28 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"44": {
 		title: "GPGPU",
-		bolum: "Part 19 — GPGPU"
+		bolum: "Part 19 — GPGPU",
+		akis: "p, v, a buffers → force → Euler → draw"
 	},
 	"45": {
 		title: "Particle physics",
-		bolum: "Part 20 — Particle physics"
+		bolum: "Part 20 — Particle physics",
+		akis: "gravity + friction + attract/repel + Euler"
 	},
 	"46": {
 		title: "Procedural environment",
-		bolum: "Part 21 — Procedural environment"
+		bolum: "Part 21 — Procedural environment",
+		akis: "terrain vertex → grass/rock instances → wind → fog"
 	},
 	"47": {
 		title: "Snow",
-		bolum: "Part 22 — Snow"
+		bolum: "Part 22 — Snow",
+		akis: "spawn → fall + wind → camera avoid → loop"
 	},
 	"48": {
 		title: "Performance",
-		bolum: "Part 23 — Performance"
+		bolum: "Part 23 — Performance",
+		akis: "draw call × triangles × shader × memory → frame time"
 	},
 	"49": {
 		title: "Three.js debug",
@@ -210,11 +228,13 @@ export const dersEn: Record<string, DersCeviri> = {
 	},
 	"52": {
 		title: "GPU errors",
-		bolum: "Part 27 — GPU errors"
+		bolum: "Part 27 — GPU errors",
+		akis: "validation → Console.warn · do not crash the tab"
 	},
 	"53": {
 		title: "Final project",
-		bolum: "Part 28 — Final project"
+		bolum: "Part 28 — Final project",
+		akis: "terrain + instance + compute snow/smoke + fresnel + bloom"
 	}
 }
 
@@ -230,4 +250,11 @@ export function dersBolum(
 	yedek: string
 ): string {
 	return dersEn[id]?.bolum ?? yedek
+}
+
+export function dersAkis(
+	id: string,
+	yedek: string
+): string {
+	return dersEn[id]?.akis ?? yedek
 }

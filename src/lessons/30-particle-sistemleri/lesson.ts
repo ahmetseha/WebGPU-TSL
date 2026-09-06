@@ -11,6 +11,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const AZAMI = 12000
@@ -109,8 +110,10 @@ export const lesson: LessonModule = {
 			update: (dt) => {
 				controls.update()
 				zaman += dt
-				istatistikEk.textContent =
-					`${adet} nokta · 1 Points`
+				istatistikEk.textContent = ky(
+					"noktaPoints",
+					{ n: adet }
+				)
 
 				if (!cpuYaz) {
 					return

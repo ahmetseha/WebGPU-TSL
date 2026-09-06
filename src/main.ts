@@ -34,7 +34,11 @@ let gecisNesil = 0
 
 dilDugmeleriniBagla()
 hareketiKur()
-void karsilamaGiris()
+
+const hashDersAl = (): string | undefined => {
+	const id = location.hash.replace("#", "")
+	return dersler.find((d) => d.id === id)?.id
+}
 
 const devamGuncelle = (): void => {
 	if (devam instanceof HTMLButtonElement) {
@@ -61,15 +65,19 @@ const kareBekle = (): Promise<void> =>
 const dersModunda = (): boolean =>
 	document.body.classList.contains("ders-mod")
 
-const dersEkraniAc = async (): Promise<void> => {
+const dersEkraniAc = async (
+	aninda = false
+): Promise<void> => {
 	if (dersModunda()) {
 		return
 	}
 
 	const nesil = ++gecisNesil
-	await karsilamaCikis()
-	if (nesil !== gecisNesil) {
-		return
+	if (!aninda) {
+		await karsilamaCikis()
+		if (nesil !== gecisNesil) {
+			return
+		}
 	}
 
 	karsilama?.setAttribute("hidden", "")
@@ -121,8 +129,11 @@ const anaSayfaAc = (): void => {
 	})()
 }
 
-const baslatEgitim = (id?: string): void => {
-	void dersEkraniAc().then(() => {
+const baslatEgitim = (
+	id?: string,
+	aninda = false
+): void => {
+	void dersEkraniAc(aninda).then(() => {
 		if (!dersModunda()) {
 			return
 		}
@@ -170,3 +181,22 @@ devam?.addEventListener("click", () => {
 anasayfa?.addEventListener("click", () => {
 	anaSayfaAc()
 })
+
+window.addEventListener("hashchange", () => {
+	const dersId = hashDersAl()
+	if (dersId !== undefined && !dersModunda()) {
+		baslatEgitim(dersId, true)
+		return
+	}
+	if (dersId === undefined && dersModunda()) {
+		anaSayfaAc()
+	}
+})
+
+const acilisDers = hashDersAl()
+if (acilisDers !== undefined) {
+	karsilama?.setAttribute("hidden", "")
+	baslatEgitim(acilisDers, true)
+} else {
+	void karsilamaGiris()
+}

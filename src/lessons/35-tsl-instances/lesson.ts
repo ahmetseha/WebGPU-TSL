@@ -22,6 +22,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const AZAMI = 1600
@@ -111,8 +112,10 @@ export const lesson: LessonModule = {
 		return {
 			update: () => {
 				controls.update()
-				istatistikEk.textContent =
-					`${adet} instance · GPU dalga`
+				istatistikEk.textContent = ky(
+					"instanceDalga",
+					{ n: adet }
+				)
 			},
 			dispose: () => {
 				controls.dispose()

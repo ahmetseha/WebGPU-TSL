@@ -22,6 +22,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky, kyVar } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 type DerinlikGecisi = TSLNode & {
@@ -180,7 +181,8 @@ export const lesson: LessonModule = {
 			},
 			update: () => {
 				controls.update()
-				istatistikEk.textContent = `efekt: ${aktif}`
+				istatistikEk.textContent =
+					`${ky("efekt")}: ${kyVar(aktif)}`
 			},
 			dispose: () => {
 				controls.dispose()

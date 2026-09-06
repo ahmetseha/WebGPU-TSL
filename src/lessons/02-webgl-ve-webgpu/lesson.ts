@@ -9,6 +9,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 function backendAdi(
@@ -17,20 +18,20 @@ function backendAdi(
 ): string {
 	if (isWebGPU === true) return "WebGPU"
 	if (isWebGL === true) return "WebGL 2"
-	return "Bilinmiyor"
+	return ky("bilinmiyor")
 }
 
 async function adapterOzet(): Promise<string> {
 	const gpu = navigator.gpu
 
 	if (gpu === undefined) {
-		return "navigator.gpu yok"
+		return ky("gpuYok")
 	}
 
 	const adapter = await gpu.requestAdapter()
 
 	if (adapter === null) {
-		return "adapter alınamadı"
+		return ky("adapterYok")
 	}
 
 	const { vendor, architecture, device } = adapter.info

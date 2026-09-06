@@ -20,6 +20,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const ADET = 6000
@@ -113,8 +114,9 @@ export const lesson: LessonModule = {
 				controls.update()
 				gecen += dt
 				yas.value = Math.min(gecen, 2.4)
-				istatistikEk.textContent =
-					`yaş ${gecen.toFixed(2)}s`
+				istatistikEk.textContent = ky("yasSaniye", {
+					n: gecen.toFixed(2)
+				})
 			},
 			dispose: () => {
 				controls.dispose()

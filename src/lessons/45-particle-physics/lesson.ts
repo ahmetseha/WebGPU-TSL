@@ -28,6 +28,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -64,8 +65,8 @@ export const lesson: LessonModule = {
 		const fareGuc = uniform(0.0024)
 		const itme = uniform(0)
 		istatistikEk.textContent = webgpu
-			? "yerçekimi + fare · compute"
-			: "compute yok · CPU yedek"
+			? ky("yerFareCompute")
+			: ky("computeYokYedek")
 
 		let kare = (): void => {}
 		let temizlik = (): void => {}

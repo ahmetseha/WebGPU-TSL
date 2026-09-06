@@ -25,6 +25,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky, kyVar } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 type EfektAdi =
@@ -176,7 +177,8 @@ export const lesson: LessonModule = {
 				controls.update()
 				a.rotation.y += 0.005
 				b.rotation.y -= 0.008
-				istatistikEk.textContent = `efekt: ${aktif}`
+				istatistikEk.textContent =
+					`${ky("efekt")}: ${kyVar(aktif)}`
 			},
 			dispose: () => {
 				controls.dispose()

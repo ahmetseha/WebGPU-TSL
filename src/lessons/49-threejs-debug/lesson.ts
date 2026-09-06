@@ -12,6 +12,7 @@ import {
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
 import { consolaYazdir } from "@/utils/debug"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 export const lesson: LessonModule = {
@@ -45,12 +46,12 @@ export const lesson: LessonModule = {
 		scene.add(kutu, kure)
 
 		istatistikEk.innerHTML = `
-			<p><strong>drawCalls</strong> bu kare çizim</p>
-			<p><strong>triangles</strong> raster üçgen</p>
-			<p><strong>points / lines</strong> nokta-çizgi</p>
-			<p><strong>frameCalls</strong> bu kare render</p>
-			<p><strong>calls</strong> uygulama ömrü (artar)</p>
-			<p><strong>geometries / textures</strong> bellek</p>
+			<p><strong>drawCalls</strong> ${ky("drawCallsKare")}</p>
+			<p><strong>triangles</strong> ${ky("trianglesRaster")}</p>
+			<p><strong>points / lines</strong> ${ky("pointsLines")}</p>
+			<p><strong>frameCalls</strong> ${ky("frameCallsKare")}</p>
+			<p><strong>calls</strong> ${ky("callsOmur")}</p>
+			<p><strong>geometries / textures</strong> ${ky("geoTexBellek")}</p>
 			<p><strong>compute.frameCalls</strong> compute</p>`
 
 		kontrolHtml(

@@ -12,6 +12,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 export const lesson: LessonModule = {
@@ -80,8 +81,8 @@ export const lesson: LessonModule = {
 				kure.rotation.y += 0.006
 				kristal.rotation.y -= 0.01
 				istatistikEk.textContent = tintAcik
-					? "pass + tint"
-					: "pass ham"
+					? ky("passTint")
+					: ky("passHam")
 			},
 			dispose: () => {
 				controls.dispose()

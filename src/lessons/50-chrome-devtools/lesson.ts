@@ -14,6 +14,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 type Sizinti = {
@@ -49,11 +50,11 @@ export const lesson: LessonModule = {
 		const sızdırGeo = new PlaneGeometry(0.18, 0.18)
 
 		istatistikEk.innerHTML = `
-			<p>1. Console: hatalar ve __egitim.info()</p>
-			<p>2. Performance: kare &lt; 16.67 ms mi?</p>
-			<p>3. Memory: sızdır / temizle</p>
-			<p>4. Network: ağır asset yok — ne aranır?</p>
-			<p>5. Rendering: FPS meter, paint flashing</p>`
+			<p>${ky("consoleAdim")}</p>
+			<p>${ky("perfAdim")}</p>
+			<p>${ky("memAdim")}</p>
+			<p>${ky("netAdim")}</p>
+			<p>${ky("renderAdim")}</p>`
 
 		kontrolHtml(
 			kontroller,

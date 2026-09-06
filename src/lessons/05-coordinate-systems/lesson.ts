@@ -18,6 +18,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 
@@ -71,7 +72,7 @@ export const lesson: LessonModule = {
 
 		const yaz = (v: number): void => {
 			istatistikEk.textContent =
-				`uzay ~ ${etiket(v)} (${v.toFixed(2)})`
+				`${ky("uzay")} ~ ${etiket(v)} (${v.toFixed(2)})`
 		}
 
 		kontrolHtml(

@@ -1,4 +1,8 @@
-import { dersBolum, dersBaslik } from "@/i18n/ders-en"
+import {
+	dersAkis,
+	dersBolum,
+	dersBaslik
+} from "@/i18n/ders-en"
 import {
 	dilAl,
 	dilAyarla,
@@ -6,6 +10,7 @@ import {
 	type Dil
 } from "@/i18n/dil"
 import { t } from "@/i18n/metin"
+import { metinleriUygula } from "@/i18n/kontrol"
 import type { LessonModule } from "@/core/lesson"
 
 export function arayuzuUygula(
@@ -57,6 +62,11 @@ export function arayuzuUygula(
 	if (dersler !== undefined) {
 		secenekleriDoldur(dersler, dil, aktifId)
 	}
+
+	metinleriUygula(document.getElementById("kontroller"))
+	metinleriUygula(
+		document.getElementById("istatistik-ek")
+	)
 }
 
 export function secenekleriDoldur(
@@ -91,15 +101,20 @@ export function secenekleriDoldur(
 export function dersMetni(
 	ders: LessonModule,
 	dil: Dil
-): { title: string; bolum: string } {
+): { title: string; bolum: string; akis: string } {
 	if (dil === "en") {
 		return {
 			title: dersBaslik(ders.id, ders.title),
-			bolum: dersBolum(ders.id, ders.bolum)
+			bolum: dersBolum(ders.id, ders.bolum),
+			akis: dersAkis(ders.id, ders.akis)
 		}
 	}
 
-	return { title: ders.title, bolum: ders.bolum }
+	return {
+		title: ders.title,
+		bolum: ders.bolum,
+		akis: ders.akis
+	}
 }
 
 export function dilDugmeleriniBagla(): void {

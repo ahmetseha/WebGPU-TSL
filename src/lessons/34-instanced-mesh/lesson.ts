@@ -15,6 +15,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const AZAMI = 2000
@@ -150,8 +151,8 @@ export const lesson: LessonModule = {
 			update: () => {
 				controls.update()
 				istatistikEk.textContent = ayriMod
-					? `${adet} ayrı Mesh`
-					: `${adet} instance · 1 mesh`
+					? ky("ayriMeshN", { n: adet })
+					: ky("instanceBir", { n: adet })
 			},
 			dispose: () => {
 				ayriTemizle()

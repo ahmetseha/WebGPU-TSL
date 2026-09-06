@@ -11,6 +11,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 export const lesson: LessonModule = {
@@ -46,7 +47,7 @@ export const lesson: LessonModule = {
 		}
 
 		istatistikEk.innerHTML =
-			"<p>Sekmeyi kırmayız. Console.warn örnekleri.</p>"
+			`<p>${ky("sekmeKirilmaz")}</p>`
 
 		kontrolHtml(
 			kontroller,
@@ -64,15 +65,10 @@ export const lesson: LessonModule = {
 		el<HTMLButtonElement>(kontroller, "#gpu")
 			?.addEventListener("click", () => {
 				if (navigator.gpu === undefined) {
-					yaz(
-						"navigator.gpu yok. WebGPU kapalı " +
-							"veya destek yok. Fallback WebGL2."
-					)
+					yaz(ky("gpuYokUzun"))
 					return
 				}
-				yaz(
-					"navigator.gpu var. Adapter isteği güvenli; sekmeyi düşürmez."
-				)
+				yaz(ky("gpuVarUzun"))
 				void navigator.gpu.requestAdapter().then((a) => {
 					console.info("adapter", a)
 				})
@@ -80,54 +76,32 @@ export const lesson: LessonModule = {
 
 		el<HTMLButtonElement>(kontroller, "#shader")
 			?.addEventListener("click", () => {
-				yaz(
-					"Shader compile: TSL → WGSL. Hata " +
-						"Console’da kırmızı [WebGPU]. " +
-						"Bu demo derlemeyi bozmaz."
-				)
+				yaz(ky("shaderUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#buffer")
 			?.addEventListener("click", () => {
-				yaz(
-					"Invalid buffer: boyut veya usage " +
-						"uyuşmaz. Console: validation. " +
-						"Sayfa genelde açık kalır."
-				)
+				yaz(ky("bufferUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#bind")
 			?.addEventListener("click", () => {
-				yaz(
-					"Binding: layout ≠ resource tipi. " +
-						"Görüntü kaybolur veya kırmızı log."
-				)
+				yaz(ky("bindUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#pipe")
 			?.addEventListener("click", () => {
-				yaz(
-					"Pipeline validation: vertex format " +
-						"shader ile uyuşmaz. CreateRenderPipeline " +
-						"başarısız log’u."
-				)
+				yaz(ky("pipeUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#lost")
 			?.addEventListener("click", () => {
-				yaz(
-					"device lost: sürücü reset / timeout. " +
-						"renderer durur. Sayfayı yenile. " +
-						"GPU.process crash ayrıdır."
-				)
+				yaz(ky("lostUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#oom")
 			?.addEventListener("click", () => {
-				yaz(
-					"OOM: çok büyük buffer/texture. " +
-						"8K dizi üretmiyoruz — sekme şişmesin."
-				)
+				yaz(ky("oomUyar"))
 			})
 
 		el<HTMLButtonElement>(kontroller, "#valid")
@@ -138,10 +112,7 @@ export const lesson: LessonModule = {
 						"uniform sarmaladı (JS); GPU tipi sonra doğrulanır",
 						bozuk
 					)
-					yaz(
-						"Zararsız geçersiz uniform: JS nesne. " +
-							"Asıl validation render anında."
-					)
+					yaz(ky("validUyar"))
 				} catch (hata: unknown) {
 					const mesaj =
 						hata instanceof Error

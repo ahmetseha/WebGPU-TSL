@@ -19,6 +19,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 type SayiliNokta = Points & { count: number }
@@ -103,8 +104,10 @@ export const lesson: LessonModule = {
 		return {
 			update: () => {
 				controls.update()
-				istatistikEk.textContent =
-					`${adet} nokta · TSL konum`
+				istatistikEk.textContent = ky(
+					"noktaTsl",
+					{ n: adet }
+				)
 			},
 			dispose: () => {
 				controls.dispose()

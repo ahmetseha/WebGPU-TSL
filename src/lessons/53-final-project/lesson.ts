@@ -58,6 +58,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -96,8 +97,8 @@ export const lesson: LessonModule = {
 		)
 		const webgpu = getBackendAdi(renderer) === "WebGPU"
 		istatistikEk.textContent = webgpu
-			? "kamp · instance + 2 compute + bloom"
-			: "kamp · kar/duman CPU yedek"
+			? ky("kampGpu")
+			: ky("kampCpu")
 		const ruzgar = uniform(0.45)
 		const kameraVec = new Vector3()
 		const kameraU = uniform(kameraVec)

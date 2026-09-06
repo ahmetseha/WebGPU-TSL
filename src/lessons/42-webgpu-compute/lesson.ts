@@ -23,6 +23,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import { getBackendAdi } from "@/core/webgpu-app"
 import notes from "./notlar.md?raw"
 
@@ -117,8 +118,8 @@ export const lesson: LessonModule = {
 		Object.assign(noktalar, { frustumCulled: false })
 		scene.add(noktalar)
 		istatistikEk.textContent = webgpu
-			? `${ADET} nokta · compute`
-			: "compute yok · CPU yedek"
+			? ky("noktaCompute", { n: ADET })
+			: ky("computeYokYedek")
 
 		kontrolHtml(
 			kontroller,

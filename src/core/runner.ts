@@ -25,6 +25,7 @@ import { notBasliklariniCevir } from "@/i18n/not-baslik"
 import { notEnAl } from "@/i18n/notlar-en"
 import { consolaYazdir, debugAc } from "@/utils/debug"
 import { yaziYaz } from "@/utils/hud"
+import { metinleriUygula } from "@/i18n/kontrol"
 
 function notlariHazirla(
 	ders: LessonModule,
@@ -83,7 +84,7 @@ export async function egitimiBaslat(
 		yaziYaz("ders-no", ders.no)
 		yaziYaz("ders-baslik", metin.title)
 		yaziYaz("ders-bolum", metin.bolum)
-		yaziYaz("akis", ders.akis)
+		yaziYaz("akis", metin.akis)
 		notlarEl.innerHTML = markdownToHtml(
 			notlariHazirla(ders, dil)
 		)
@@ -128,6 +129,8 @@ export async function egitimiBaslat(
 		})
 
 		consolaYazdir(app.renderer)
+		metinleriUygula(kontroller)
+		metinleriUygula(istatistikEk)
 	}
 
 	const hashId = location.hash.replace("#", "")

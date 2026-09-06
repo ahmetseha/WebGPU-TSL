@@ -1,4 +1,5 @@
 import type { WebGPUApp } from "@/core/webgpu-app"
+import { metinleriUygula } from "@/i18n/kontrol"
 
 export type LessonContext = {
 	app: WebGPUApp
@@ -29,6 +30,7 @@ export function kontrolHtml(
 	html: string
 ): void {
 	kontroller.innerHTML = html
+	metinleriUygula(kontroller)
 }
 
 export function el<T extends HTMLElement>(

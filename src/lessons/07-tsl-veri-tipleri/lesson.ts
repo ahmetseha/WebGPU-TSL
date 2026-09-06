@@ -19,6 +19,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 export const lesson: LessonModule = {
@@ -73,8 +74,7 @@ export const lesson: LessonModule = {
 			<button id="v3" type="button">vec3</button>`
 		)
 
-		istatistikEk.textContent =
-			"sol: tip · sağ: vec3 positionLocal"
+		istatistikEk.textContent = ky("solTip")
 
 		const kur = (v: number, id: string): void => {
 			uTip.value = v

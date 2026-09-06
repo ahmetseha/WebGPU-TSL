@@ -12,6 +12,7 @@ import {
 import { kameraSifirla, temelIsik } from "@/core/sahne"
 import { getBackendAdi } from "@/core/webgpu-app"
 import { consolaYazdir } from "@/utils/debug"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 export const lesson: LessonModule = {
@@ -40,13 +41,13 @@ export const lesson: LessonModule = {
 
 		const spector =
 			backend === "WebGL 2"
-				? "WebGL2: Spector.js frame yakalayabilir."
-				: "WebGPU: Spector.js bu kareyi YAKALAMAZ."
+				? ky("spectorWebgl")
+				: ky("spectorWebgpu")
 
 		istatistikEk.innerHTML = `
-			<p>Chrome’da yerleşik WebGPU paneli yok.</p>
+			<p>${ky("chromePanelYok")}</p>
 			<p>${spector}</p>
-			<p>İsteğe bağlı: WebGPU Inspector eklentisi.</p>`
+			<p>${ky("inspectorEklenti")}</p>`
 
 		kontrolHtml(
 			kontroller,
