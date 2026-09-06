@@ -119,19 +119,24 @@ html.hareket .karsilama-govde > * {
 }
 
 .karsilama-ust {
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
+	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .karsilama-ust .marka {
-	grid-column: 2;
-	justify-self: center;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.marka img {
+	display: block;
+	border-radius: 8px;
 }
 
 .karsilama-ust .dil-switch {
-	grid-column: 3;
-	justify-self: end;
+	flex-shrink: 0;
 }
 
 .marka {
@@ -142,7 +147,7 @@ html.hareket .karsilama-govde > * {
 	letter-spacing: 0.06em;
 }
 
-.marka span {
+.marka-amp {
 	margin: 0 5px;
 	color: var(--accent);
 }
@@ -488,14 +493,18 @@ html.hareket #uygulama:not([hidden]) #hud {
 }
 
 #anasayfa.ikon-dugme {
-	border-color: transparent;
-	background: var(--accent);
-	color: #fff7f3;
+	overflow: hidden;
+	background: transparent;
+}
+
+#anasayfa.ikon-dugme img {
+	display: block;
+	border-radius: 10px;
 }
 
 #anasayfa.ikon-dugme:hover {
-	background: #ff814f;
-	color: #fff7f3;
+	background: transparent;
+	filter: brightness(1.08);
 }
 
 .notlar-dugme {
