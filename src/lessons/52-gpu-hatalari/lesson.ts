@@ -36,7 +36,7 @@ export const lesson: LessonModule = {
 		)
 		scene.add(kure)
 
-		let son = "Henüz örnek yok — düğmeye bas."
+		let son = ky("henuzOrnek")
 		const yaz = (metin: string): void => {
 			son = metin
 			console.warn(metin)

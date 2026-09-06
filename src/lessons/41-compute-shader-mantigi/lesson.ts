@@ -113,9 +113,10 @@ export const lesson: LessonModule = {
 				? `<label>Hız
 				<input id="hiz" type="range" min="1"
 				max="20" value="6" /></label>
-				<p>Compute WebGPU’da yazıyor</p>`
-				: `<p>Compute WebGPU ister. Backend:
-				${getBackendAdi(renderer)}</p>`
+				<p>${ky("computeYaziyor")}</p>`
+				: `<p>${ky("computeIsterBackend", {
+					ad: getBackendAdi(renderer)
+				})}</p>`
 		)
 
 		el<HTMLInputElement>(kontroller, "#hiz")

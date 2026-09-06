@@ -186,11 +186,11 @@ export const lesson: LessonModule = {
 
 		kontrolHtml(
 			kontroller,
-			`${webgpu ? "" : "<p>Compute WebGPU ister. WebGL — CPU yedek.</p>"}
+			`${webgpu ? "" : `<p>${ky("computeIsterYedek")}</p>`}
 			<label>Rüzgar
 			<input id="ruzgar" type="range" min="0"
 			max="20" value="6" /></label>
-			<p>Kameraya yaklaşınca taneler savrulur.</p>`
+			<p>${ky("karSavrulur")}</p>`
 		)
 
 		el<HTMLInputElement>(kontroller, "#ruzgar")

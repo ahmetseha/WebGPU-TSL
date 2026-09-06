@@ -100,11 +100,7 @@ export const lesson: LessonModule = {
 		el<HTMLButtonElement>(kontroller, "#gpu-btn")
 			?.addEventListener("click", (event) => {
 				const varMi = navigator.gpu !== undefined
-				yaz(
-					varMi
-						? "navigator.gpu var — requestAdapter() hazır"
-						: "navigator.gpu yok — WebGL yedek"
-				)
+				yaz(varMi ? ky("gpuHazir") : ky("gpuYedek"))
 				event.currentTarget instanceof HTMLElement &&
 					event.currentTarget.classList.add("aktif")
 				el(kontroller, "#backend-btn")

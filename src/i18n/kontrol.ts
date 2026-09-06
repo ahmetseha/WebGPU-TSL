@@ -274,6 +274,74 @@ const metinler = {
 	validUyar: {
 		tr: "Zararsız geçersiz uniform: JS nesne. Asıl validation render anında.",
 		en: "Harmless invalid uniform: a JS object. Real validation happens at render time."
+	},
+	computeYaziyor: {
+		tr: "Compute WebGPU’da yazıyor",
+		en: "Compute is writing on WebGPU"
+	},
+	computeIsterBackend: {
+		tr: "Compute WebGPU ister. Backend: {ad}",
+		en: "Compute needs WebGPU. Backend: {ad}"
+	},
+	computeIsterYedek: {
+		tr: "Compute WebGPU ister. WebGL — CPU yedek.",
+		en: "Compute needs WebGPU. WebGL — CPU fallback."
+	},
+	computeIsterKamp: {
+		tr: "Compute WebGPU ister. Kar/duman CPU veya TSL.",
+		en: "Compute needs WebGPU. Snow/smoke is CPU or TSL."
+	},
+	kampNot: {
+		tr: "Sessiz kış kampı — tek sahne, tek ruh hali.",
+		en: "A quiet winter camp — one scene, one mood."
+	},
+	karSavrulur: {
+		tr: "Kameraya yaklaşınca taneler savrulur.",
+		en: "Flakes scatter when the camera gets close."
+	},
+	sariHedef: {
+		tr: "Sarı nokta hedef. İvme ona doğru yazılır.",
+		en: "The yellow point is the target. Acceleration writes toward it."
+	},
+	tepeCimen: {
+		tr: "Tek tepe, çimen, kaya. Efekt çöplüğü değil.",
+		en: "One hill, grass, rock. Not an effects junkyard."
+	},
+	solOlcek: {
+		tr: "Sol ölçek · orta renk · sağ konum",
+		en: "Left scale · middle color · right position"
+	},
+	gpuHazir: {
+		tr: "navigator.gpu var — requestAdapter() hazır",
+		en: "navigator.gpu present — requestAdapter() is ready"
+	},
+	gpuYedek: {
+		tr: "navigator.gpu yok — WebGL yedek",
+		en: "navigator.gpu missing — WebGL fallback"
+	},
+	henuzOrnek: {
+		tr: "Henüz örnek yok — düğmeye bas.",
+		en: "No sample yet — press a button."
+	},
+	hashRastgele: {
+		tr: "hash rastgele",
+		en: "hash random"
+	},
+	noiseOlcek4: {
+		tr: "noise ölçek 4",
+		en: "noise scale 4"
+	},
+	noiseOlcek20: {
+		tr: "noise ölçek 20",
+		en: "noise scale 20"
+	},
+	normalViewRenk: {
+		tr: "normalView renk",
+		en: "normalView color"
+	},
+	positionLocalRenk: {
+		tr: "positionLocal renk",
+		en: "positionLocal color"
 	}
 } as const
 

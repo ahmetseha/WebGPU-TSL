@@ -222,12 +222,12 @@ export const lesson: LessonModule = {
 
 		kontrolHtml(
 			kontroller,
-			`${webgpu ? "" : "<p>Compute WebGPU ister. Kar/duman CPU veya TSL.</p>"}
+			`${webgpu ? "" : `<p>${ky("computeIsterKamp")}</p>`}
 			<label>Rüzgar
 			<input id="ruzgar" type="range" min="0"
 			max="18" value="5" /></label>
 			<button id="bloom" type="button" class="aktif">Bloom</button>
-			<p>Sessiz kış kampı — tek sahne, tek ruh hali.</p>`
+			<p>${ky("kampNot")}</p>`
 		)
 
 		el<HTMLInputElement>(kontroller, "#ruzgar")

@@ -21,6 +21,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 function sayiBagla(
@@ -99,7 +100,7 @@ export const lesson: LessonModule = {
 				<input id="hiz" type="range" min="0" max="4"
 					step="0.05" value="1" />
 			</label>
-			<p>Sol ölçek · orta renk · sağ konum</p>`
+			<p>${ky("solOlcek")}</p>`
 		)
 
 		sayiBagla(kontroller, "#hiz", hiz)

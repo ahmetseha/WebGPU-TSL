@@ -94,7 +94,7 @@ export const lesson: LessonModule = {
 
 		kontrolHtml(
 			kontroller,
-			`${webgpu ? "" : "<p>Compute WebGPU ister. WebGL — CPU yedek.</p>"}
+			`${webgpu ? "" : `<p>${ky("computeIsterYedek")}</p>`}
 			<label>Adet
 			<input id="adet" type="range" min="500"
 			max="8000" step="500" value="4000" /></label>

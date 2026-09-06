@@ -33,6 +33,7 @@ import {
 	type LessonModule
 } from "@/core/lesson"
 import { kameraSifirla, temelIsik } from "@/core/sahne"
+import { ky } from "@/i18n/kontrol"
 import notes from "./notlar.md?raw"
 
 const CIME = 520
@@ -147,7 +148,7 @@ export const lesson: LessonModule = {
 			`<label>Rüzgar
 			<input id="ruzgar" type="range" min="0"
 			max="20" value="7" /></label>
-			<p>Tek tepe, çimen, kaya. Efekt çöplüğü değil.</p>`
+			<p>${ky("tepeCimen")}</p>`
 		)
 
 		el<HTMLInputElement>(kontroller, "#ruzgar")

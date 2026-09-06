@@ -123,7 +123,7 @@ export const lesson: LessonModule = {
 
 		kontrolHtml(
 			kontroller,
-			`${webgpu ? "" : "<p>Compute WebGPU ister. WebGL — CPU yedek.</p>"}
+			`${webgpu ? "" : `<p>${ky("computeIsterYedek")}</p>`}
 			<label>Genlik
 			<input id="genlik" type="range" min="1"
 			max="20" value="8" /></label>
