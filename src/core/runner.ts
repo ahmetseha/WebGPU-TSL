@@ -7,12 +7,41 @@ import {
 	getBackendAdi,
 	type WebGPUApp
 } from "@/core/webgpu-app"
+import { dersMetni, arayuzuUygula } from "@/ui/arayuz"
+import {
+	dilAl,
+	dilDinle,
+	sonDersiYaz,
+	type Dil
+} from "@/i18n/dil"
+import { t } from "@/i18n/metin"
+import { notBasliklariniCevir } from "@/i18n/not-baslik"
+import { notEnAl } from "@/i18n/notlar-en"
 import { consolaYazdir, debugAc } from "@/utils/debug"
 import { yaziYaz } from "@/utils/hud"
 
+function notlariHazirla(
+	ders: LessonModule,
+	dil: Dil
+): string {
+	if (dil === "en") {
+		return notEnAl(ders.id) ??
+			notBasliklariniCevir(ders.notes, "en")
+	}
+
+	return ders.notes
+}
+
+export type EgitimKumanda = {
+	duraklat: () => void
+	surdur: () => void
+	dersYukle: (id: string) => Promise<void>
+}
+
 export async function egitimiBaslat(
-	dersler: LessonModule[]
-): Promise<void> {
+	dersler: LessonModule[],
+	baslangicId?: string
+): Promise<EgitimKumanda> {
 	const canvas = document.querySelector("#sahne")
 
 	if (!(canvas instanceof HTMLCanvasElement)) {
@@ -37,16 +66,23 @@ export async function egitimiBaslat(
 		throw new Error("HUD iskeleti eksik")
 	}
 
-	for (const ders of dersler) {
-		const opt = document.createElement("option")
-		opt.value = ders.id
-		opt.textContent = `${ders.no} — ${ders.title}`
-		secici.append(opt)
-	}
-
 	let aktif: LessonHandle | null = null
 	let aktifDers: LessonModule | null = null
 	const clock = new Clock()
+
+	const basliklariYaz = (ders: LessonModule): void => {
+		const dil = dilAl()
+		const metin = dersMetni(ders, dil)
+		const sozluk = t(dil)
+		document.title = `${sozluk.ders} ${ders.no} — ${metin.title}`
+		yaziYaz("ders-no", `${sozluk.ders} ${ders.no}`)
+		yaziYaz("ders-baslik", metin.title)
+		yaziYaz("ders-bolum", metin.bolum)
+		yaziYaz("akis", ders.akis)
+		notlarEl.innerHTML = markdownToHtml(
+			notlariHazirla(ders, dil)
+		)
+	}
 
 	const dersYukle = async (id: string): Promise<void> => {
 		const ders = dersler.find((d) => d.id === id)
@@ -65,17 +101,14 @@ export async function egitimiBaslat(
 
 		aktifDers = ders
 		secici.value = ders.id
-		document.title = `Ders ${ders.no} — ${ders.title}`
-		yaziYaz("ders-no", `Ders ${ders.no}`)
-		yaziYaz("ders-baslik", ders.title)
-		yaziYaz("ders-bolum", ders.bolum)
-		yaziYaz("akis", ders.akis)
-		notlarEl.innerHTML = markdownToHtml(ders.notes)
 		location.hash = ders.id
+		sonDersiYaz(ders.id)
+		arayuzuUygula(dilAl(), dersler, ders.id)
+		basliklariYaz(ders)
 
 		debugAc(app.renderer, ders.id)
 		console.info(
-			`Ders ${ders.no}: window.__egitim.info()`
+			`${t(dilAl()).ders} ${ders.no}: window.__egitim.info()`
 		)
 
 		aktif = await ders.start({
@@ -90,12 +123,14 @@ export async function egitimiBaslat(
 	const hashId = location.hash.replace("#", "")
 	const ilk =
 		dersler.find((d) => d.id === hashId)?.id ??
+		dersler.find((d) => d.id === baslangicId)?.id ??
 		dersler[0]?.id
 
 	if (ilk === undefined) {
 		throw new Error("Ders listesi boş")
 	}
 
+	arayuzuUygula(dilAl(), dersler)
 	await dersYukle(ilk)
 
 	secici.addEventListener("change", () => {
@@ -139,17 +174,38 @@ export async function egitimiBaslat(
 			notlarPanel?.classList.toggle("kapali")
 		})
 
+	document
+		.getElementById("notlar-kapat")
+		?.addEventListener("click", () => {
+			notlarPanel?.classList.add("kapali")
+		})
+
+	dilDinle((dil) => {
+		arayuzuUygula(dil, dersler, aktifDers?.id)
+		if (aktifDers !== null) {
+			basliklariYaz(aktifDers)
+		}
+		yaziYaz(
+			"webgpu-destek",
+			navigator.gpu === undefined
+				? t(dil).destekYok
+				: t(dil).destekVar
+		)
+	})
+
 	yaziYaz("backend", getBackendAdi(app.renderer))
 	yaziYaz(
 		"webgpu-destek",
-		navigator.gpu === undefined ? "yok" : "var"
+		navigator.gpu === undefined
+			? t(dilAl()).destekYok
+			: t(dilAl()).destekVar
 	)
 
 	let fpsZaman = 0
 	let fpsKare = 0
 	let fps = 0
 
-	app.renderer.setAnimationLoop(() => {
+	const kare = (): void => {
 		const dt = clock.getDelta()
 		fpsZaman += dt
 		fpsKare += 1
@@ -181,7 +237,19 @@ export async function egitimiBaslat(
 			"frame-ms",
 			`${(dt * 1000).toFixed(1)} ms`
 		)
-	})
+	}
+
+	app.renderer.setAnimationLoop(kare)
+
+	return {
+		duraklat: () => {
+			app.renderer.setAnimationLoop(null)
+		},
+		surdur: () => {
+			app.renderer.setAnimationLoop(kare)
+		},
+		dersYukle
+	}
 }
 
 export type { WebGPUApp }

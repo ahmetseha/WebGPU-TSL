@@ -7,65 +7,182 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>Three.js WebGPU & TSL Eğitimi</title>
+		<meta
+			name="description"
+			content="Interactive open-source course for Three.js, WebGPU, and TSL. 53 lessons in Turkish and English."
+		/>
+		<title>Three.js WebGPU & TSL</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<canvas id="sahne"></canvas>
+		<section id="karsilama">
+			<div class="karsilama-arka" aria-hidden="true"></div>
+			<header class="karsilama-ust">
+				<p class="marka">WebGPU<span>&</span>TSL</p>
+				<div
+					class="dil-switch"
+					role="group"
+					aria-label="Language"
+				>
+					<button
+						id="dil-tr"
+						type="button"
+						data-dil="tr"
+					>
+						TR
+					</button>
+					<button
+						id="dil-en"
+						type="button"
+						data-dil="en"
+					>
+						EN
+					</button>
+				</div>
+			</header>
 
-		<header id="ust">
-			<div class="baslik">
-				<p id="ders-no">Ders</p>
-				<h1 id="ders-baslik">Yükleniyor</h1>
-				<p id="ders-bolum"></p>
+			<div class="karsilama-govde">
+				<p class="eyebrow" data-i18n="karsilamaEyebrow"></p>
+				<h1 data-i18n="karsilamaBaslik"></h1>
+				<p class="ozet" data-i18n="karsilamaOzet"></p>
+				<ul class="ozellikler" id="ozellikler"></ul>
+				<div class="karsilama-aksiyon">
+					<button
+						id="baslat"
+						type="button"
+						class="birincil"
+						data-i18n="baslat"
+					></button>
+					<button
+						id="devam"
+						type="button"
+						class="ikincil"
+						hidden
+						data-i18n="devam"
+					></button>
+				</div>
 			</div>
-			<div class="gezgin">
-				<button id="onceki" type="button">Önceki</button>
-				<select id="ders-sec" aria-label="Ders seç"></select>
-				<button id="sonraki" type="button">Sonraki</button>
-				<button id="notlar-ac" type="button">Notlar</button>
-			</div>
-		</header>
+		</section>
 
-		<aside id="hud">
-			<p id="akis" class="akis"></p>
-			<dl>
-				<div><dt>Backend</dt><dd id="backend">…</dd></div>
-				<div>
-					<dt>navigator.gpu</dt>
-					<dd id="webgpu-destek">…</dd>
-				</div>
-				<div><dt>FPS</dt><dd id="fps">0</dd></div>
-				<div><dt>Frame</dt><dd id="frame-ms">0</dd></div>
-				<div>
-					<dt>drawCalls</dt>
-					<dd id="draw-calls">0</dd>
-				</div>
-				<div>
-					<dt>triangles</dt>
-					<dd id="triangles">0</dd>
-				</div>
-				<div><dt>points</dt><dd id="points">0</dd></div>
-				<div><dt>lines</dt><dd id="lines">0</dd></div>
-				<div>
-					<dt>geometries</dt>
-					<dd id="geometries">0</dd>
-				</div>
-				<div>
-					<dt>textures</dt>
-					<dd id="textures">0</dd>
-				</div>
-				<div>
-					<dt>compute</dt>
-					<dd id="compute-calls">0</dd>
-				</div>
-			</dl>
-			<div id="istatistik-ek"></div>
-			<div id="kontroller"></div>
-		</aside>
+		<canvas id="sahne" hidden></canvas>
 
-		<article id="notlar">
-			<div id="notlar-icerik"></div>
-		</article>
+		<div id="uygulama" hidden>
+			<header id="ust">
+				<div class="baslik">
+					<p id="ders-no"></p>
+					<h1 id="ders-baslik"></h1>
+					<p id="ders-bolum"></p>
+				</div>
+				<div class="gezgin">
+					<button
+						id="anasayfa"
+						type="button"
+						class="anasayfa-dugme"
+						data-i18n="anasayfa"
+					></button>
+					<div
+						class="dil-switch kucuk"
+						role="group"
+						aria-label="Language"
+					>
+						<button type="button" data-dil="tr">TR</button>
+						<button type="button" data-dil="en">EN</button>
+					</div>
+					<button
+						id="onceki"
+						type="button"
+						data-i18n="onceki"
+					></button>
+					<div class="ders-sec-kutu">
+						<select
+							id="ders-sec"
+							data-i18n-aria="dersSec"
+						></select>
+					</div>
+					<button
+						id="sonraki"
+						type="button"
+						data-i18n="sonraki"
+					></button>
+					<button
+						id="notlar-ac"
+						type="button"
+						data-i18n="notlar"
+					></button>
+				</div>
+			</header>
+
+			<aside id="hud">
+				<p class="panel-etiket" data-i18n="hudEtiket"></p>
+				<p id="akis" class="akis"></p>
+				<dl>
+					<div>
+						<dt>Backend</dt>
+						<dd id="backend">…</dd>
+					</div>
+					<div>
+						<dt>navigator.gpu</dt>
+						<dd id="webgpu-destek">…</dd>
+					</div>
+					<div><dt>FPS</dt><dd id="fps">0</dd></div>
+					<div>
+						<dt>Frame</dt>
+						<dd id="frame-ms">0</dd>
+					</div>
+					<div>
+						<dt>drawCalls</dt>
+						<dd id="draw-calls">0</dd>
+					</div>
+					<div>
+						<dt>triangles</dt>
+						<dd id="triangles">0</dd>
+					</div>
+					<div>
+						<dt>points</dt>
+						<dd id="points">0</dd>
+					</div>
+					<div>
+						<dt>lines</dt>
+						<dd id="lines">0</dd>
+					</div>
+					<div>
+						<dt>geometries</dt>
+						<dd id="geometries">0</dd>
+					</div>
+					<div>
+						<dt>textures</dt>
+						<dd id="textures">0</dd>
+					</div>
+					<div>
+						<dt>compute</dt>
+						<dd id="compute-calls">0</dd>
+					</div>
+				</dl>
+				<div id="istatistik-ek"></div>
+				<div id="kontroller"></div>
+			</aside>
+
+			<article id="notlar">
+				<header class="notlar-ust">
+					<p data-i18n="notlar"></p>
+					<button
+						id="notlar-kapat"
+						type="button"
+						data-i18n="notlarKapat"
+					></button>
+				</header>
+				<div id="notlar-icerik"></div>
+			</article>
+		</div>
 
 		<p id="hata" hidden></p>
 		<script type="module" src="/src/main.ts"></script>
