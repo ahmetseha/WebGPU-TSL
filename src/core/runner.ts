@@ -80,7 +80,7 @@ export async function egitimiBaslat(
 		const metin = dersMetni(ders, dil)
 		const sozluk = t(dil)
 		document.title = `${sozluk.ders} ${ders.no} — ${metin.title}`
-		yaziYaz("ders-no", `${sozluk.ders} ${ders.no}`)
+		yaziYaz("ders-no", ders.no)
 		yaziYaz("ders-baslik", metin.title)
 		yaziYaz("ders-bolum", metin.bolum)
 		yaziYaz("akis", ders.akis)

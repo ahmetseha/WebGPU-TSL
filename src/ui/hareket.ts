@@ -56,10 +56,11 @@ function dugmeHareketleriniBagla(): void {
 		return
 	}
 
-	const secici =
-		".birincil, .ikincil, .gezgin > button, #hud button, #notlar button"
+	const yazi =
+		".birincil, .ikincil, .notlar-dugme, #hud button, #notlar button"
+	const ikon = ".ikon-dugme"
 
-	hover(secici, (hedef) => {
+	hover(yazi, (hedef) => {
 		void animate(
 			hedef,
 			{ y: -2, scale: 1.02 },
@@ -75,7 +76,19 @@ function dugmeHareketleriniBagla(): void {
 		}
 	})
 
-	press(secici, (hedef) => {
+	hover(ikon, (hedef) => {
+		void animate(
+			hedef,
+			{ scale: 1.06 },
+			{ type: "spring", stiffness: 420, damping: 24 }
+		)
+
+		return () => {
+			void animate(hedef, { scale: 1 }, yay)
+		}
+	})
+
+	press(`${yazi}, ${ikon}`, (hedef) => {
 		void animate(hedef, { scale: 0.97 }, { duration: 0.1 })
 
 		return () => {
@@ -149,6 +162,12 @@ export function dilGostergesiniGuncelle(): void {
 }
 
 export async function karsilamaGiris(): Promise<void> {
+	const panel = elAl("karsilama")
+	if (panel !== null) {
+		stilleriSifirla(panel)
+		panel.style.opacity = "1"
+	}
+
 	const ust = document.querySelector(".karsilama-ust")
 	const parcalar = liste(".karsilama-govde > *")
 	const hedefler = [
@@ -207,7 +226,7 @@ export async function karsilamaCikis(): Promise<void> {
 	stilleriSifirla(panel)
 }
 
-const kromSecici = ".baslik, .gezgin, #hud"
+const kromSecici = ".ust-bar, #hud"
 
 const kromAl = (): HTMLElement[] => liste(kromSecici)
 

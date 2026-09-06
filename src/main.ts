@@ -30,7 +30,7 @@ const devam = document.getElementById("devam")
 const anasayfa = document.getElementById("anasayfa")
 
 let kumanda: EgitimKumanda | null = null
-let gecisVar = false
+let gecisNesil = 0
 
 dilDugmeleriniBagla()
 hareketiKur()
@@ -51,44 +51,82 @@ dilDinle(() => {
 	}
 })
 
+const kareBekle = (): Promise<void> =>
+	new Promise((coz) => {
+		requestAnimationFrame(() => {
+			coz()
+		})
+	})
+
+const dersModunda = (): boolean =>
+	document.body.classList.contains("ders-mod")
+
 const dersEkraniAc = async (): Promise<void> => {
-	if (gecisVar || document.body.classList.contains("ders-mod")) {
+	if (dersModunda()) {
 		return
 	}
 
-	gecisVar = true
+	const nesil = ++gecisNesil
 	await karsilamaCikis()
+	if (nesil !== gecisNesil) {
+		return
+	}
+
 	karsilama?.setAttribute("hidden", "")
+	if (karsilama !== null) {
+		karsilama.style.opacity = ""
+		karsilama.style.transform = ""
+	}
 	uygulama?.removeAttribute("hidden")
 	canvas?.removeAttribute("hidden")
 	document.body.classList.add("ders-mod")
 	await dersSahnesiGiris()
-	gecisVar = false
 }
 
 const anaSayfaAc = (): void => {
-	if (gecisVar || !document.body.classList.contains("ders-mod")) {
+	if (!dersModunda() && uygulama?.hasAttribute("hidden")) {
 		return
 	}
 
+	const nesil = ++gecisNesil
+
 	void (async () => {
-		gecisVar = true
 		kumanda?.duraklat()
 		await dersSahnesiCikis()
+		if (nesil !== gecisNesil) {
+			return
+		}
+
 		uygulama?.setAttribute("hidden", "")
 		canvas?.setAttribute("hidden", "")
-		karsilama?.removeAttribute("hidden")
+		if (karsilama !== null) {
+			karsilama.style.opacity = "1"
+			karsilama.style.transform = "none"
+			karsilama.removeAttribute("hidden")
+		}
 		document.body.classList.remove("ders-mod")
+		history.replaceState(
+			null,
+			"",
+			`${location.pathname}${location.search}`
+		)
 		arayuzuUygula(dilAl())
 		devamGuncelle()
 		dilGostergesiniGuncelle()
+		await kareBekle()
+		if (nesil !== gecisNesil) {
+			return
+		}
 		await karsilamaGiris()
-		gecisVar = false
 	})()
 }
 
 const baslatEgitim = (id?: string): void => {
 	void dersEkraniAc().then(() => {
+		if (!dersModunda()) {
+			return
+		}
+
 		if (kumanda !== null) {
 			kumanda.surdur()
 			if (id !== undefined) {
@@ -104,6 +142,9 @@ const baslatEgitim = (id?: string): void => {
 	egitimiBaslat(dersler, id)
 		.then((sonuc) => {
 			kumanda = sonuc
+			if (!dersModunda()) {
+				kumanda.duraklat()
+			}
 		})
 		.catch((error: unknown) => {
 			console.error(error)
