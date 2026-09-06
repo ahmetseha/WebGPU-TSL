@@ -64,7 +64,7 @@ input {
 	z-index: 20;
 	display: flex;
 	flex-direction: column;
-	padding: 28px 32px 40px;
+	padding: 32px 64px 48px;
 }
 
 #karsilama[hidden] {
@@ -72,7 +72,8 @@ input {
 }
 
 html.hareket .karsilama-ust,
-html.hareket .karsilama-govde > * {
+html.hareket .karsilama-govde > *,
+html.hareket .karsilama-gorsel {
 	opacity: 0;
 }
 
@@ -113,9 +114,21 @@ html.hareket .karsilama-govde > * {
 }
 
 .karsilama-ust,
-.karsilama-govde {
+.karsilama-orta,
+.karsilama-govde,
+.karsilama-gorsel {
 	position: relative;
 	z-index: 1;
+}
+
+.karsilama-orta {
+	flex: 1;
+	display: grid;
+	grid-template-columns: minmax(280px, 0.9fr) minmax(380px, 1.15fr);
+	column-gap: clamp(40px, 5vw, 80px);
+	align-items: center;
+	width: 100%;
+	min-height: 0;
 }
 
 .karsilama-ust {
@@ -153,8 +166,90 @@ html.hareket .karsilama-govde > * {
 }
 
 .karsilama-govde {
-	width: min(720px, 100%);
-	margin: auto 0;
+	width: 100%;
+	max-width: 520px;
+	margin: 0;
+}
+
+.karsilama-gorsel {
+	display: flex;
+	align-items: stretch;
+	justify-content: stretch;
+	width: 100%;
+	height: min(68vh, 580px);
+	min-height: 320px;
+}
+
+.karsilama-gorsel-cerceve {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	padding: 16px 18px 14px;
+	border-radius: 24px;
+	background: rgba(14, 17, 23, 0.46);
+	box-shadow: 0 28px 64px rgba(0, 0, 0, 0.34);
+	backdrop-filter: blur(18px);
+}
+
+.karsilama-gorsel-ust,
+.karsilama-gorsel-alt {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	font-family: var(--mono);
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.karsilama-gorsel-ust {
+	justify-content: space-between;
+	color: var(--muted);
+}
+
+.karsilama-gorsel-chip {
+	color: var(--ok);
+}
+
+.karsilama-gorsel-tuval {
+	position: relative;
+	flex: 1;
+	min-height: 0;
+	margin: 8px 0;
+}
+
+.karsilama-gorsel-tuval::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: repeating-linear-gradient(
+		to bottom,
+		transparent 0 3px,
+		rgba(0, 0, 0, 0.12) 3px 4px
+	);
+	mask-image: radial-gradient(
+		ellipse at 50% 45%,
+		#000 58%,
+		transparent 86%
+	);
+}
+
+#karsilama-tuval {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.karsilama-gorsel-alt {
+	justify-content: space-between;
+	gap: 8px;
+	color: rgba(154, 163, 174, 0.55);
+}
+
+.karsilama-gorsel-alt span.aktif {
+	color: var(--accent);
 }
 
 .eyebrow {
@@ -780,7 +875,8 @@ dd {
 
 @media (prefers-reduced-motion: reduce) {
 	html.hareket .karsilama-ust,
-	html.hareket .karsilama-govde > * {
+	html.hareket .karsilama-govde > *,
+	html.hareket .karsilama-gorsel {
 		opacity: 1;
 	}
 
@@ -790,6 +886,19 @@ dd {
 }
 
 @media (max-width: 900px) {
+	#karsilama {
+		padding: 24px 22px 32px;
+	}
+
+	.karsilama-orta {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+
+	.karsilama-gorsel {
+		display: none;
+	}
+
 	.karsilama-govde h1 {
 		max-width: none;
 	}

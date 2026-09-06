@@ -170,9 +170,11 @@ export async function karsilamaGiris(): Promise<void> {
 
 	const ust = document.querySelector(".karsilama-ust")
 	const parcalar = liste(".karsilama-govde > *")
+	const gorsel = document.querySelector(".karsilama-gorsel")
 	const hedefler = [
 		...(ust instanceof HTMLElement ? [ust] : []),
-		...parcalar
+		...parcalar,
+		...(gorsel instanceof HTMLElement ? [gorsel] : [])
 	]
 
 	if (hedefler.length === 0) {
@@ -189,6 +191,14 @@ export async function karsilamaGiris(): Promise<void> {
 			ust,
 			{ opacity: [0, 1], y: [-8, 0] },
 			{ duration: 0.4, ease: yumusak }
+		)
+	}
+
+	if (gorsel instanceof HTMLElement) {
+		void animate(
+			gorsel,
+			{ opacity: [0, 1], x: [24, 0] },
+			{ duration: 0.7, ease: yumusak, delay: 0.12 }
 		)
 	}
 

@@ -5,6 +5,7 @@ export type ArayuzMetni = {
 	karsilamaEyebrow: string
 	karsilamaBaslik: string
 	karsilamaOzet: string
+	karsilamaOnizleme: string
 	baslat: string
 	devam: string
 	onceki: string
@@ -29,6 +30,7 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		karsilamaBaslik: "GPU’yu ekranda görerek öğren",
 		karsilamaOzet:
 			"53 interaktif ders. Three.js, WebGPU ve TSL’i kopyala-yapıştır değil, sahneyi bozarak öğren. Notu oku, değeri değiştir, nedenini gör.",
+		karsilamaOnizleme: "Canlı raster — icosahedron",
 		baslat: "Eğitime başla",
 		devam: "Kaldığın yerden devam et",
 		onceki: "Önceki",
@@ -45,8 +47,8 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		kare: "Kare",
 		ozellikler: [
 			"WebGPU + TSL",
-			"53 sahne",
-			"Türkçe / English"
+			"53 sahne"
+			// "Türkçe / English"
 		]
 	},
 	en: {
@@ -55,6 +57,7 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		karsilamaBaslik: "Learn the GPU by seeing it",
 		karsilamaOzet:
 			"53 interactive lessons. Learn Three.js, WebGPU, and TSL by breaking the scene — not by copying code. Read the note, change a value, see why.",
+		karsilamaOnizleme: "Live raster — icosahedron",
 		baslat: "Start the course",
 		devam: "Continue where you left off",
 		onceki: "Previous",
@@ -71,8 +74,8 @@ export const metin: Record<Dil, ArayuzMetni> = {
 		kare: "Frame",
 		ozellikler: [
 			"WebGPU + TSL",
-			"53 scenes",
-			"Türkçe / English"
+			"53 scenes"
+			// "Türkçe / English"
 		]
 	}
 }

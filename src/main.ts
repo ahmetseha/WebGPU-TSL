@@ -20,6 +20,10 @@ import {
 	karsilamaGiris,
 	ozellikleriOynat
 } from "@/ui/hareket"
+import {
+	karsilamaSahneyiBaslat,
+	karsilamaSahneyiDurdur
+} from "@/ui/karsilama-sahne"
 
 const hataKutusu = document.getElementById("hata")
 const karsilama = document.getElementById("karsilama")
@@ -73,6 +77,7 @@ const dersEkraniAc = async (
 	}
 
 	const nesil = ++gecisNesil
+	karsilamaSahneyiDurdur()
 	if (!aninda) {
 		await karsilamaCikis()
 		if (nesil !== gecisNesil) {
@@ -126,6 +131,7 @@ const anaSayfaAc = (): void => {
 			return
 		}
 		await karsilamaGiris()
+		karsilamaSahneyiBaslat()
 	})()
 }
 
@@ -199,4 +205,5 @@ if (acilisDers !== undefined) {
 	baslatEgitim(acilisDers, true)
 } else {
 	void karsilamaGiris()
+	karsilamaSahneyiBaslat()
 }

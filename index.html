@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -43,6 +43,7 @@
 						WebGPU<span class="marka-amp">&</span>TSL
 					</span>
 				</p>
+				<!-- TR geçici kapalı
 				<div
 					class="dil-switch"
 					role="group"
@@ -64,28 +65,49 @@
 						EN
 					</button>
 				</div>
+				-->
 			</header>
 
-			<div class="karsilama-govde">
-				<p class="eyebrow" data-i18n="karsilamaEyebrow"></p>
-				<h1 data-i18n="karsilamaBaslik"></h1>
-				<p class="ozet" data-i18n="karsilamaOzet"></p>
-				<ul class="ozellikler" id="ozellikler"></ul>
-				<div class="karsilama-aksiyon">
-					<button
-						id="baslat"
-						type="button"
-						class="birincil"
-						data-i18n="baslat"
-					></button>
-					<button
-						id="devam"
-						type="button"
-						class="ikincil"
-						hidden
-						data-i18n="devam"
-					></button>
+			<div class="karsilama-orta">
+				<div class="karsilama-govde">
+					<p class="eyebrow" data-i18n="karsilamaEyebrow"></p>
+					<h1 data-i18n="karsilamaBaslik"></h1>
+					<p class="ozet" data-i18n="karsilamaOzet"></p>
+					<ul class="ozellikler" id="ozellikler"></ul>
+					<div class="karsilama-aksiyon">
+						<button
+							id="baslat"
+							type="button"
+							class="birincil"
+							data-i18n="baslat"
+						></button>
+						<button
+							id="devam"
+							type="button"
+							class="ikincil"
+							hidden
+							data-i18n="devam"
+						></button>
+					</div>
 				</div>
+				<aside class="karsilama-gorsel" aria-hidden="true">
+					<div class="karsilama-gorsel-cerceve">
+						<p class="karsilama-gorsel-ust">
+							<span data-i18n="karsilamaOnizleme"></span>
+							<span class="karsilama-gorsel-chip">20 △</span>
+						</p>
+						<div class="karsilama-gorsel-tuval">
+							<canvas id="karsilama-tuval"></canvas>
+						</div>
+						<p class="karsilama-gorsel-alt">
+							<span>CPU</span>
+							<span>DRAW</span>
+							<span>VERTEX</span>
+							<span>TRIANGLE</span>
+							<span>FRAGMENT</span>
+						</p>
+					</div>
+				</aside>
 			</div>
 		</section>
 
@@ -122,6 +144,7 @@
 						</div>
 					</div>
 					<nav class="gezgin">
+						<!-- TR geçici kapalı
 						<div
 							class="dil-switch kucuk"
 							role="group"
@@ -138,6 +161,7 @@
 								EN
 							</button>
 						</div>
+						-->
 						<div class="gezgin-ders">
 							<button
 								id="onceki"
